@@ -1,0 +1,41 @@
+{
+  "kind": "implementation_parity_not_accuracy",
+  "device": "cpu",
+  "torch_version": "2.8.0+cu128",
+  "numpy_version": "2.2.6",
+  "checkpoint_step": 8308,
+  "exported_sha256": "a5907efc9933aeaa2dc40611445d2a86a05c9eb77a096a2ad3ac7385839aeeae",
+  "reference_module_sha256": "f01f1e77e8f71082555f9ec6ed07dd50d0b4b42b9cf1faca1968e87c3496ba9e",
+  "real_heldout_pairs_checked": 3,
+  "results": [
+    {
+      "case_number": 1,
+      "human_sample_count": 43,
+      "robot_sample_count": 47,
+      "embedding_max_abs_error": 0.0,
+      "mapping_exact_equal": true,
+      "path_exact_equal": true,
+      "filter_exact_equal": true
+    },
+    {
+      "case_number": 2,
+      "human_sample_count": 48,
+      "robot_sample_count": 48,
+      "embedding_max_abs_error": 0.0,
+      "mapping_exact_equal": true,
+      "path_exact_equal": true,
+      "filter_exact_equal": true
+    },
+    {
+      "case_number": 3,
+      "human_sample_count": 48,
+      "robot_sample_count": 48,
+      "embedding_max_abs_error": 0.0,
+      "mapping_exact_equal": true,
+      "path_exact_equal": true,
+      "filter_exact_equal": true
+    }
+  ],
+  "model_updates_performed": 0,
+  "dataset_assets_exported": false
+}

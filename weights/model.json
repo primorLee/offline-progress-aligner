@@ -1,0 +1,77 @@
+{
+  "schema": "offline_progress_aligner_release_v1",
+  "architecture": "RelationTemporalAdapter",
+  "step": 8308,
+  "input_dim": 512,
+  "hidden_dim": 128,
+  "parameters": 182657,
+  "file": "aligner_step008308.safetensors",
+  "sha256": "a5907efc9933aeaa2dc40611445d2a86a05c9eb77a096a2ad3ac7385839aeeae",
+  "source_checkpoint_sha256": "88f5251f9b9ac68d4ee866a735a3deb273d2048fe5f17604de3f43e2fff287d1",
+  "source_manifest_sha256": "f14cc8f6ca969684d079f7e021243359a480076ebadf4cbc9e7ace29006b1c55",
+  "feature_encoder_checkpoint_sha256_observed": [
+    "5d281bf0d89f2bbfd72ff5a14f9a40ce12534e790b0402e2ca970539c7bcc294"
+  ],
+  "training_config": {
+    "seed": 270927,
+    "batch_size": 128,
+    "sample_frames": 32,
+    "hidden_dim": 128,
+    "weight_decay": 0.0001,
+    "similarity_temperature": 0.1,
+    "dtw_gamma": 1.0,
+    "dtw_column_temperature": 0.1,
+    "cycle_variance_weight": 0.001,
+    "path_loss_weight": 0.3,
+    "min_learning_rate": 1e-05
+  },
+  "coverage": {
+    "rh20t_train_candidates": 10622,
+    "rh20t_validation_candidates": 1265,
+    "rh20t_train_pairs_visited": 6550,
+    "rh20t_train_sample_visits": 87680,
+    "fixed_validation_count": 20,
+    "sampler_epochs": 14,
+    "coverage_not_full_corpus": true
+  },
+  "last_validation_records": {
+    "validation_fixed": {
+      "phase": "validation_fixed",
+      "step": 8300,
+      "loss": 1.3345919847488403,
+      "cycle_loss": 0.7559285759925842,
+      "path_loss": 1.9288779497146606,
+      "cycle_return_mae": 0.21064281463623047,
+      "evaluated_pairs": 20
+    }
+  },
+  "metrics_are_not_cross_embodiment_semantic_accuracy": true,
+  "license": "CC-BY-NC-4.0",
+  "contains_upstream_encoder": false,
+  "contains_optimizer": false,
+  "h2r_pretraining_aggregate_records": {
+    "coverage.json": {
+      "step": 4000,
+      "expected": {
+        "train": 2027,
+        "validation": 228
+      }
+    },
+    "status.json": {
+      "step": 4000,
+      "phase": "budget_finished_with_data_gaps",
+      "train_ready": 1873,
+      "validation_ready": 209
+    },
+    "data_status.json": {
+      "ready": {
+        "train": 1873,
+        "validation": 209
+      },
+      "expected": {
+        "train": 2027,
+        "validation": 228
+      }
+    }
+  }
+}
