@@ -1,6 +1,25 @@
-# Main figure generation record
+# Main figure: source, reconstruction and corrections
 
-Created and revised in the ChatGPT web image interface. The requested backend was GPT Image 2.5; the interface did not expose a verifiable image-model version. Depicted video frames and matrix colors are conceptual illustrations, not experimental images or measured similarities. This is a raster illustration, not an editable vector diagram.
+The initial raster concept was created and revised in the ChatGPT web image interface. The requested backend was GPT Image 2.5; the interface did not expose a verifiable image-model version. The current canonical figure is **overview.svg**, a semantic vector reconstruction with live text and individually selectable groups. The prior raster concept is retained in the repository history.
+
+**overview.pdf** is exported directly from the SVG; **overview.png** is its rendered preview. No raster images are embedded in either the SVG or PDF. The PDF fonts are embedded. The original hand/gripper scene glyphs and matrix colors are conceptual illustrations, not recordings, measured similarities or success results.
+
+## Implementation checks and corrections
+
+Content was checked against `offline_progress_aligner/model.py`, `aligner.py`, `dtw.py` and `docs/FEATURE_FORMAT.md`.
+
+- Each sampled frame supplies a variable-size set of 512-D object-pair tokens. There is no raw-video encoder in this package. Dashed upstream arrows indicate the source of the cached inputs.
+- The human and robot timelines are independent; neither domain is inherently faster or longer. Time/frame IDs do not enter the learned adapter.
+- Both branches use the same adapter parameters. Its exact flow is token projection, learned score/softmax-weighted pooling over valid pairs, pooled state plus temporal difference plus causal convolution (kernel 3), concatenation, readout and L2 normalization.
+- The cosine matrix is `S = Z_R @ Z_H.T`; endpoint-constrained hard DTW runs forward and in reverse. Path indices are averaged into the mapping for each source sample. Whole sequences are available offline even though the adapter's temporal convolution is causal.
+- All output correspondences pass through the filters; there is no bypass from the similarity matrix to the accepted output.
+- Default gates are cosine >= 0.50, robot-to-human-to-robot cycle error <= 2 **sampled robot frames**, and margin >= 0.01 over the best human candidate farther than 3 sampled human indices from the mapped position. A missing distant competitor causes rejection.
+- Check marks mean accepted by those rules; they are not ground-truth semantic correctness, calibrated confidence, or task success. No experimental result was changed.
+- Oversized headings, disconnected filter annotations, ambiguous input dimensions and colliding formula/axis labels were removed. Labels are editable text; objects are named SVG groups, not automatic outlines traced from the raster concept.
+
+## Rebuild and edit
+
+Edit `overview.svg` directly for a figure-editor workflow. To reproduce the checked layout programmatically, install `PyMuPDF` and run `python assets/build_overview.py`; that command regenerates the canonical SVG, PDF and PNG. Keep source changes in the builder if using that regeneration route.
 
 The revision below was applied to an initial four-stage overview. Input format, shared adapter, embedding dimensions, bidirectional monotonic DTW and filtering criteria are grounded in the released implementation.
 
