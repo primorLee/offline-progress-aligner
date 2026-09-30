@@ -4,7 +4,7 @@ Match frames at similar action progress in a **same-task human/robot video pair*
 
 [中文说明](README_zh.md) · [Model card](MODEL_CARD.md) · [Feature format](docs/FEATURE_FORMAT.md) · [Training](docs/TRAINING.md)
 
-![Offline progress alignment: shared temporal representations, monotonic matching, and correspondence filtering](assets/overview.svg)
+![Offline progress alignment: shared temporal representations, monotonic matching, and correspondence filtering](assets/overview.png)
 
 *Method overview (offline inference). Videos illustrate the upstream source; this package reads token caches. The shared adapter maps each frame's token set to a unit-norm 128-D embedding. Both complete sequences enter DTW; all three filters must pass before a correspondence is retained. Scene drawings and matrix colors are schematic, and acceptance is not a verified semantic label.*
 
