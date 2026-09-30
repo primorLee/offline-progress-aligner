@@ -8,7 +8,7 @@
 
 *离线推理示意图。视频插画表示上游来源，本仓库实际读取缓存 token；共享适配器将每帧 token 集合汇总为单位范数的 128 维表示。DTW 读取完整序列，三个条件全部通过才保留对应。画面和矩阵颜色均为示意，保留标记不等于人工确认的语义正确标签。*
 
-[可编辑 SVG](assets/overview.svg) · [矢量 PDF](assets/overview.pdf) · [PNG 预览](assets/overview.png) · [图形来源及修正记录](assets/hero-prompt.md)
+[原字形矢量 SVG](assets/overview.svg) · [可改字 SVG](assets/overview-editable-text.svg) · [矢量 PDF](assets/overview.pdf) · [PNG 预览](assets/overview.png) · [原图／矢量对照](assets/compare.html) · [图形来源及修正记录](assets/hero-prompt.md)
 
 ## 怎么工作
 

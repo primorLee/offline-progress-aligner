@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A · 色调与原字形修正版</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f8;color:#152339;font:15px/1.6 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1840px;margin:auto;padding:24px}h1{font-size:24px;margin:0 0 6px}p{margin:0 0 16px;color:#526178}nav{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:14px 0 20px}a,button{font:inherit;background:white;border:1px solid #ccd5e1;border-radius:7px;padding:8px 15px;text-decoration:none;color:#174b93;cursor:pointer}a.primary{background:#174fb1;color:white;border-color:#174fb1}button[aria-pressed=true]{background:#e2ebfc;color:#163f8b;border-color:#82a7e1}figure{margin:0;padding:13px;background:white;border:1px solid #dbe2ec;border-radius:10px}figcaption{font-size:14px;font-weight:650;margin-bottom:10px;color:#425671}img{display:block;width:100%;height:auto}.pair{display:none;grid-template-columns:1fr 1fr;gap:16px}.small{font-size:13px;margin-top:12px;color:#708096}#native{width:100%}@media(max-width:900px){main{padding:14px}.pair{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>A · 色调与原字形修正版</h1>
+<p>色块按 A 原图取色；文字保留原图手绘字形与笔画粗细，转换为独立矢量轮廓。</p>
+<nav><a class="primary" href="overview.svg" download="offline-progress-aligner-A.svg">下载修正版 SVG</a><a class="primary" href="overview.pdf" download="offline-progress-aligner-A.pdf">下载矢量 PDF</a><a href="overview-editable-text.svg" download="offline-progress-aligner-live-text.svg">可打字修改版 SVG</a><button id="one" aria-pressed="true">看矢量成品</button><button id="both" aria-pressed="false">与 A 原图对照</button><a href="overview-web-comic.png" download>A 原图</a></nav>
+<section id="single"><figure><figcaption>修正版 · 原图字形已转曲</figcaption><img id="native" src="overview.svg?v=reference-lettering-color-2" alt="A 的可编辑矢量成品"></figure></section>
+<section class="pair" id="pair"><figure><figcaption>A 原图</figcaption><img src="overview-web-comic.png" alt="A 原始参考"></figure><figure><figcaption>矢量重建 · 同尺寸与布局</figcaption><img src="overview.svg?v=reference-lettering-color-2" alt="A 原图的矢量重建"></figure></section>
+<p class="small">主版本包含 59 组原图字形轮廓，可按字形路径编辑；可打字修改版另存，使用 Comic Sans MS。SVG 与 PDF 均无嵌入位图。布局沿用 A，背景纹理与手绘边缘仍可能存在细微差异。</p>
+</main><script>const one=document.getElementById('one'),both=document.getElementById('both');function mode(pair){document.getElementById('single').style.display=pair?'none':'block';document.getElementById('pair').style.display=pair?'grid':'none';one.setAttribute('aria-pressed',String(!pair));both.setAttribute('aria-pressed',String(pair))}one.onclick=()=>mode(false);both.onclick=()=>mode(true);</script></body></html>

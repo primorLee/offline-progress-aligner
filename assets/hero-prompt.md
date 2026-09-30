@@ -1,28 +1,34 @@
-# Main figure: source, reconstruction and corrections
+# Main figure: reference A and editable reconstruction
 
-The raster concept was created and revised in the ChatGPT web image interface. The requested backend was GPT Image 2.5; the interface did not expose a verifiable image-model version. The latest clean, hand-drawn web output is **overview-web-comic.png**. The canonical editable diagram is **overview.svg**: its labels and connectors were rebuilt natively, with six colored clip-art scenes converted to vector paths. Earlier concepts remain in repository history.
+The approved reference is **overview-web-comic.png** (1774 × 887), generated and revised in the ChatGPT web interface. The requested image-model name was GPT Image 2.5; the web interface did not expose a verifiable backend version.
 
-**overview.pdf** is exported directly from the SVG; **overview.png** is its rendered preview. No raster images are embedded in either the SVG or PDF. The PDF embeds the used Comic Sans MS regular/bold font subsets. SVG uses live Comic Sans MS text and requires that font installed for the same appearance; font files are not redistributed. The README displays the PNG preview for portable typography. The colored hand/gripper illustrations have no pose skeletons or keypoint overlays. All scenes and matrix colors are conceptual, not recordings, measured similarities or success results.
+**overview.svg** is the canonical vector reconstruction of reference A, on the same 1774 × 887 canvas. Panel contours, connectors, token grids, embedding bars, matrix and sieve are native geometry. The original generated handwriting is recovered into **59 independent vector label groups**, stored separately in **lettering/reference-a.svg**. This preserves the reference letterforms instead of substituting a system font. Labels in this edition are editable as paths, not by typing. The independently provided **overview-editable-text.svg** retains 70 live Comic Sans MS text elements for typing edits; its letterforms remain an approximation of the generated reference.
 
-## Implementation checks and corrections
+The small hand/gripper scenes are separately converted to colored vector paths in **clipart/**. There are no skeletons, joint markers or keypoint overlays. Color anchors for the title panels, arrows, embedding bars, tokens and operator boxes are sampled from reference A. No full-page raster, pixel grid or whole-image tracing is embedded. Original paper-like texture and hand-drawn edge variation can still differ from the raster.
 
-Content was checked against `offline_progress_aligner/model.py`, `aligner.py`, `dtw.py` and `docs/FEATURE_FORMAT.md`.
+**overview.pdf** is exported directly from the main SVG and contains no raster image objects. **overview.png** is its rendered preview. Because the primary figure uses original lettering outlines, it does not depend on installed fonts. The original and vector are compared in **compare.html**. Scenes and matrix colors are schematic, not experimental records or outcomes.
 
-- Each sampled frame supplies a variable-size set of 512-D object-pair tokens. There is no raw-video encoder in this package. Dashed upstream arrows indicate the source of the cached inputs.
-- The human and robot timelines are independent; neither domain is inherently faster or longer. Time/frame IDs do not enter the learned adapter.
-- Both branches use the same adapter parameters. Its exact flow is token projection, learned score/softmax-weighted pooling over valid pairs, pooled state plus temporal difference plus causal convolution (kernel 3), concatenation, readout and L2 normalization.
-- The cosine matrix is `S = Z_R @ Z_H.T`; endpoint-constrained hard DTW runs forward and in reverse. Path indices are averaged into the mapping for each source sample. Whole sequences are available offline even though the adapter's temporal convolution is causal.
-- All output correspondences pass through the filters; there is no bypass from the similarity matrix to the accepted output.
-- Default gates are cosine >= 0.50, robot-to-human-to-robot cycle error <= 2 **sampled robot frames**, and margin >= 0.01 over the best human candidate farther than 3 sampled human indices from the mapped position. A missing distant competitor causes rejection.
-- Check marks mean accepted by those rules; they are not ground-truth semantic correctness, calibrated confidence, or task success. No experimental result was changed.
-- The robot time axis increases upwards along the plotted path. Retained example pairs depict the same grasp/place stage; the rejected example pairs approach with placement. The native diagram explicitly connects the matrix to DTW and the filters to the candidate outputs.
-- Labels remain editable text, and modules/connectors are named native SVG groups. Only the six clip-art scenes are color-traced paths (under `clipart/`); no whole-figure bitmap or traced text is embedded. Human hands, robot arms and grippers have no skeleton, joint markers or pose lines.
+## Implementation correspondence
+
+- Each frame supplies a variable-size set of 512-D object-pair interaction tokens. The package reads token caches, not raw video pixels.
+- Both branches share the adapter. It projects tokens to 128 dimensions, pools valid tokens using learned weights, and combines the pooled feature, its first temporal difference and causal Conv1D context with kernel size 3.
+- Concatenation gives 384 dimensions; the readout produces L2-normalized 128-D frame embeddings.
+- The complete human and robot sequences enter cosine matching and monotonic DTW in both directions.
+- Candidate correspondences pass similarity, cycle-return and distant-match-margin filtering. Acceptance means passing these heuristic gates, not ground-truth semantic correctness.
+- Time axes, module order, panel layout and paths follow reference A. No video-generation or robot-action module is introduced.
 
 ## Rebuild and edit
 
-Edit `overview.svg` directly in a figure editor. For a reproducible rebuild, install `PyMuPDF`, `reportlab` and `svglib`, then run `python assets/build_overview.py --font-dir <installed-font-directory>` (default: Windows Fonts). The directory must contain installed `comic.ttf` and `comicbd.ttf`. This regenerates SVG, vector PDF and PNG without calling image generation. Keep layout changes in the builder when using that route. The optional `--retrace` step additionally needs Pillow and vtracer; it recreates the six clip-art SVGs from fixed scene crops of `overview-web-comic.png`. It does not trace labels or computation arrows.
+The diagram authoring source is **build_overview.py**. The optional **build_reference_lettering.py** regenerates the separate label contours from reference A; prebuilt contours are included. Install `PyMuPDF` and `fonttools`, provide installed Comic Sans MS with `--font-dir`, and install the PDF exporter locally with:
 
-The revision below was applied to an initial four-stage overview. Input format, shared adapter, embedding dimensions, bidirectional monotonic DTW and filtering criteria are grounded in the released implementation.
+```text
+npm install --prefix build/figure/native/pdf-deps pdfkit@0.20.2 svg-to-pdfkit@0.1.8
+python assets/build_overview.py
+```
+
+No font files are redistributed. The main figure uses the original lettering contours. Its print exporter uses SVG-to-PDFKit to preserve vector gradients. The final PDF is checked for zero image objects. Edit labels by typing in the live-text alternative, edit contour labels and named groups in the main SVG, or update the corresponding authoring source. The original illustration crops are not required for a rebuild; the separate clip-art SVG files are included.
+
+The earlier raster prompt history follows for provenance. It is not an additional current figure specification.
 
 ## Submitted revision prompt
 

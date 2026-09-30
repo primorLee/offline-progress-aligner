@@ -8,7 +8,7 @@ Match frames at similar action progress in a **same-task human/robot video pair*
 
 *Method overview (offline inference). Videos illustrate the upstream source; this package reads token caches. The shared adapter maps each frame's token set to a unit-norm 128-D embedding. Both complete sequences enter DTW; all three filters must pass before a correspondence is retained. Scene drawings and matrix colors are schematic, and acceptance is not a verified semantic label.*
 
-[Editable SVG](assets/overview.svg) · [Vector PDF](assets/overview.pdf) · [PNG preview](assets/overview.png) · [Figure provenance and corrections](assets/hero-prompt.md)
+[Vector SVG · original lettering](assets/overview.svg) · [Editable text SVG](assets/overview-editable-text.svg) · [Vector PDF](assets/overview.pdf) · [PNG preview](assets/overview.png) · [Original / vector comparison](assets/compare.html) · [Figure provenance and corrections](assets/hero-prompt.md)
 
 ```mermaid
 flowchart LR
